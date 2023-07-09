@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage()
-    await page.goto("https://www.shred.sk/category/slovak/")
+    await page.goto("https://opencnft.io/")
 
     // // valuet from page
     // const grabParagraph = await page.evaluate(() => {
@@ -24,19 +24,19 @@ const puppeteer = require('puppeteer');
 
      // GRAB POST INFORMATION FROM PAGE
      const grabPost = await page.evaluate(() => {
-        const postTag = document.querySelectorAll('.td_module_10')
+        const postTag = document.querySelectorAll('tr')
        
         let posts = []
         postTag.forEach((post) => {
-            const titlePost = post.querySelector('h3 a');
-            const contentPost = post.querySelectorAll('.td-module-meta-info span')
-            const authorPost = contentPost[0]
-            const datePost =  contentPost[2]
+            const titleProject = post.querySelector('.Cell div span');
+            // const floorPrice = post.querySelectorAll('.Cell div')
+            // const price = floorPrice[0]
+            // const state =  floorPrice[1]
 
             posts.push({ 
-                title: titlePost.innerText, 
-                author: authorPost.innerText, 
-                date: datePost.innerText 
+                title: titleProject.innerText, 
+                // price: price.innerText, 
+                // state: state.innerText 
             })
         })
         return posts
